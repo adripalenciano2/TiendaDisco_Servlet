@@ -1,11 +1,9 @@
 package com.example.tiendadisco_servlet;
 
-
-import com.example.tiendadisco_servlet.modelo.GestorConsultas;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-
+import com.example.tiendadisco_servlet.modelo.GestorConsultas;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -13,7 +11,7 @@ import java.io.PrintWriter;
 public class ListaDiscosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.sendRedirect("FormularioAutores.jsp");
     }
 
     @Override
@@ -25,6 +23,7 @@ public class ListaDiscosServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
         out.println("<h1>Tienda Discos</h1>");
+
 
         if(discos.length==0){
             out.println("<h2>Error con los datos introducidos</h2>");
@@ -38,7 +37,7 @@ public class ListaDiscosServlet extends HttpServlet {
             out.println("</ul>");
         }
 
-        out.println("<a href=\"formularioAutores.html\">Volver a introducir el autor/grupo</a>");
+        out.println("<a href=\"FormularioAutores.jsp\">Volver a introducir el autor/grupo</a>");
         out.println("<br/>");
         out.println("<a href=\"index.jsp\">Volver al menú principal</a>");
         out.println("</body></html>");

@@ -12,18 +12,28 @@ import java.io.PrintWriter;
 public class CompraDiscoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.sendRedirect("FormularioCompra.jsp");
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int codigo = Integer.parseInt(request.getParameter("cd_code"));
         GestorConsultas gc = new GestorConsultas();
-        String comprado =  gc.bajaDisco(codigo);
-        response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+        String codigo = request.getParameter("cd_code");
+
+        response.setContentType("text/html");
         out.println("<html><body>");
         out.println("<h1>Tienda Discos</h1>");
+
+        String comprado;
+
+        if(codigo != "") {
+            comprado = gc.bajaDisco(Integer.parseInt(codigo));
+        }else {
+            comprado = "";
+        }
+
 
         if(comprado==""){
             out.println("<h2>Error con los datos introducido</h2>");
@@ -34,7 +44,7 @@ public class CompraDiscoServlet extends HttpServlet {
             out.println("<p>"+comprado+"</p>");
         }
 
-        out.println("<a href=\"formularioCompra.html\">Volver a la opcion de compra</a>");
+        out.println("<a href=\"FormularioCompra.jsp\">Volver a la opcion de compra</a>");
         out.println("<br/>");
         out.println("<a href=\"index.jsp\">Volver al menú principal</a>");
         out.println("</body></html>");
